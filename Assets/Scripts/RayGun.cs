@@ -1,8 +1,21 @@
+using System;
 using UnityEngine;
 
-// Script d'interaction 3D basé sur le raycast permettant de "grab" les objets appartenant au layer "Dechets", de les rapprocher/éloigner avec le scroll, et de les relâcher avec un clic.
+/// <summary>
+/// Script d'interaction 3D basé sur le raycast permettant de "grab" les objets
+/// appartenant au layer "Dechets", de les rapprocher/éloigner avec le scroll,
+/// et de les relâcher avec un clic.
+///
+/// À placer sur la caméra du joueur (ou un objet enfant de la caméra).
+/// </summary>
 public class DechetGrabInteraction : MonoBehaviour
 {
+    /// <summary>Déclenché quand un déchet vient d'être grab (envoie le GameObject concerné).</summary>
+    public static event Action<GameObject> OnDechetGrabbed;
+
+    /// <summary>Déclenché quand un déchet vient d'être relâché (envoie le GameObject concerné).</summary>
+    public static event Action<GameObject> OnDechetReleased;
+
     [Header("Références")]
     [Tooltip("Caméra utilisée pour le raycast. Si vide, utilise Camera.main.")]
     [SerializeField] private Camera playerCamera;
@@ -62,7 +75,9 @@ public class DechetGrabInteraction : MonoBehaviour
         }
     }
 
-    // Lance un raycast depuis la caméra pour tenter d'attraper un déchet.
+    /// <summary>
+    /// Lance un raycast depuis la caméra pour tenter d'attraper un déchet.
+    /// </summary>
     private void TryGrab()
     {
         Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
@@ -87,8 +102,6 @@ public class DechetGrabInteraction : MonoBehaviour
         originalConstraints = rb.constraints;
 
         // On désactive la gravité et on fige les rotations pendant le grab
-        rb.linearVelocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
         rb.useGravity = false;
         rb.isKinematic = false;
         rb.constraints = RigidbodyConstraints.FreezeRotation;
@@ -108,10 +121,14 @@ public class DechetGrabInteraction : MonoBehaviour
         {
             label.Show();
         }
+
+        OnDechetGrabbed?.Invoke(rb.gameObject);
     }
 
-    // Ajuste la distance de tenue en fonction du scroll de la molette.
-    // Scroll vers le haut = éloigne, scroll vers le bas = rapproche.
+    /// <summary>
+    /// Ajuste la distance de tenue en fonction du scroll de la molette.
+    /// Scroll vers le haut = éloigne, scroll vers le bas = rapproche.
+    /// </summary>
     private void HandleScroll()
     {
         float scrollInput = Input.GetAxis(scrollAxisName);
@@ -123,7 +140,9 @@ public class DechetGrabInteraction : MonoBehaviour
         }
     }
 
-    // Déplace l'objet tenu vers le point cible devant la caméra, à la distance actuelle.
+    /// <summary>
+    /// Déplace l'objet tenu vers le point cible devant la caméra, à la distance actuelle.
+    /// </summary>
     private void MoveHeldObject()
     {
         Vector3 targetPosition = playerCamera.transform.position
@@ -134,10 +153,14 @@ public class DechetGrabInteraction : MonoBehaviour
         );
     }
 
-    // Relâche l'objet tenu et restaure ses propriétés physiques d'origine.
+    /// <summary>
+    /// Relâche l'objet tenu et restaure ses propriétés physiques d'origine.
+    /// </summary>
     private void Release()
     {
         if (heldRigidbody == null) return;
+
+        GameObject releasedObject = heldRigidbody.gameObject;
 
         heldRigidbody.useGravity = originalUseGravity;
         heldRigidbody.isKinematic = originalIsKinematic;
@@ -151,5 +174,7 @@ public class DechetGrabInteraction : MonoBehaviour
         }
 
         heldRigidbody = null;
+
+        OnDechetReleased?.Invoke(releasedObject);
     }
 }

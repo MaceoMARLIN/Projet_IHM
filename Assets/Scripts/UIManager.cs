@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Canvas gameOverMenu;
     [SerializeField] private Canvas startMenu;
     [SerializeField] private Canvas InGameUI;
+    [SerializeField] private GameObject FlecheUI; // Reference to the TargetArrowUI GameObject
 
     private void Start()
     {
@@ -74,6 +75,14 @@ public class UIManager : MonoBehaviour
     {
         Application.Quit();
         UnityEditor.EditorApplication.isPlaying = false;
+    }
+
+    public void ToggleFlecheUI(bool isActive)
+    {
+        if (FlecheUI != null)
+        {
+            FlecheUI.SetActive(isActive);
+        }
     }
 
 

@@ -33,6 +33,11 @@ public class DechetSpawner : MonoBehaviour
 
     private readonly List<GameObject> spawnedDechets = new List<GameObject>();
 
+    private void Start()
+    {
+        SpawnRandomBatch();
+    }
+
     private void Awake()
     {
         if (spawnAreaCenter == null)

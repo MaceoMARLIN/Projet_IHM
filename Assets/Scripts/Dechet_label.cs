@@ -12,6 +12,7 @@ public class DechetLabel : MonoBehaviour
     [Header("Références")]
     [Tooltip("Le TextMeshPro (3D) ou TextMeshProUGUI (World Space Canvas) affiché au-dessus du déchet.")]
     [SerializeField] private TMP_Text label;
+    [SerializeField] private Color couleurCorrecte;
 
     [Tooltip("Caméra à regarder. Si vide, utilise Camera.main.")]
     [SerializeField] private Camera targetCamera;
@@ -73,6 +74,19 @@ public class DechetLabel : MonoBehaviour
         if (label != null)
         {
             label.gameObject.SetActive(false);
+        }
+    }
+
+    public void SetCorrectColor(bool active)
+    {
+        couleurCorrecte.a = 1f; // Assurez-vous que la couleur est complètement opaque
+        if (active)
+        {
+            label.color = couleurCorrecte;
+        }
+        else
+        {
+            label.color = Color.white; // réinitialise la couleur par défaut du TMP
         }
     }
 }
