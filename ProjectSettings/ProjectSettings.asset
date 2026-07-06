@@ -826,7 +826,11 @@ PlayerSettings:
   webGLCloseOnQuit: 0
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Android: CROSS_PLATFORM_INPUT;MOBILE_INPUT
+    Standalone: CROSS_PLATFORM_INPUT
+    Windows Store Apps: MOBILE_INPUT
+    iPhone: CROSS_PLATFORM_INPUT;MOBILE_INPUT
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
@@ -923,7 +927,7 @@ PlayerSettings:
   qnxGraphicConfPath: 
   apiCompatibilityLevel: 6
   captureStartupLogs: {}
-  activeInputHandler: 1
+  activeInputHandler: 2
   windowsGamepadBackendHint: 0
   cloudProjectId: 51da09aa-0e9d-4a59-8c41-1f67b6c73f7d
   framebufferDepthMemorylessMode: 0
