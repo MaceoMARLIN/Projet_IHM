@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -7,11 +8,17 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Canvas gameOverMenu;
     [SerializeField] private Canvas startMenu;
     [SerializeField] private Canvas InGameUI;
+    [SerializeField] private Canvas questionnaireUI;
     [SerializeField] private GameObject FlecheUI; // Reference to the TargetArrowUI GameObject
     [SerializeField] private TMPro.TextMeshProUGUI timerText; // Reference to the timer TextMeshProUGUI
+    [SerializeField] private GameObject panelScoreFinal; // Reference to the final score panel
+
+
+    private bool gameOverShown;
 
     private void Start()
     {
+        gameOverShown = false;
         // Ensure the game starts unpaused
         showStartMenu();
     }
@@ -31,6 +38,33 @@ public class UIManager : MonoBehaviour
             }
         }
         timerText.text = "Time: " + Mathf.FloorToInt(Time.timeSinceLevelLoad).ToString() + "s"; // Update the timer text
+
+        if (!gameOverShown && !HasDechetsObjects())
+        {
+            gameOverShown = true;
+            showGameOverMenu();
+        }
+    }
+
+    private bool HasDechetsObjects()
+    {
+        int dechetsLayer = LayerMask.NameToLayer("Dechets");
+
+        if (dechetsLayer == -1)
+        {
+            return false;
+        }
+
+        GameObject[] allObjects = FindObjectsOfType<GameObject>();
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.layer == dechetsLayer)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void showPauseMenu()
@@ -57,6 +91,7 @@ public class UIManager : MonoBehaviour
         InGameUI.enabled = false;
         pauseMenu.enabled = false;
         gameOverMenu.enabled = false;
+        questionnaireUI.enabled = false;
         Time.timeScale = 0f; // Pause the game
         Cursor.lockState = CursorLockMode.None; // Unlock the cursor
         Cursor.visible = true; // Show the cursor
@@ -68,6 +103,7 @@ public class UIManager : MonoBehaviour
         gameOverMenu.enabled = false;
         startMenu.enabled = false;
         InGameUI.enabled = true;
+        questionnaireUI.enabled = false;
         Time.timeScale = 1f; // Resume the game
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
         Cursor.visible = false; // Hide the cursor
@@ -87,5 +123,21 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void ShowQuestionnaireUI()
+    {
+        questionnaireUI.enabled = true;
+        InGameUI.enabled = false;
+        pauseMenu.enabled = false;
+        gameOverMenu.enabled = false;
+        startMenu.enabled = false;
+        Time.timeScale = 0f; // Pause the game
+        Cursor.lockState = CursorLockMode.None; // Unlock the cursor
+        Cursor.visible = true; // Show the cursor
+    }
 
+    public void RestartGame()
+    {
+        Time.timeScale = 1f; // Resume the game
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+    }
 }

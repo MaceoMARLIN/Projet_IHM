@@ -35,7 +35,7 @@ public class DechetSpawner : MonoBehaviour
 
     private void Start()
     {
-        SpawnRandomBatch();
+        //SpawnRandomBatch();
     }
 
     private void Awake()
