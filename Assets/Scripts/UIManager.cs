@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Canvas startMenu;
     [SerializeField] private Canvas InGameUI;
     [SerializeField] private GameObject FlecheUI; // Reference to the TargetArrowUI GameObject
+    [SerializeField] private TMPro.TextMeshProUGUI timerText; // Reference to the timer TextMeshProUGUI
 
     private void Start()
     {
@@ -29,6 +30,7 @@ public class UIManager : MonoBehaviour
                 showPauseMenu();
             }
         }
+        timerText.text = "Time: " + Mathf.FloorToInt(Time.timeSinceLevelLoad).ToString() + "s"; // Update the timer text
     }
 
     private void showPauseMenu()

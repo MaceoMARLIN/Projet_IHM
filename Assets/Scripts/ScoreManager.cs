@@ -7,10 +7,11 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance { get; private set; }
 
     [Header("Références")]
-    [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private TextMeshProUGUI numberOfDechetsTextPommes;
-    [SerializeField] private TextMeshProUGUI numberOfDechetsTextEmballages;
-    [SerializeField] private TextMeshProUGUI numberOfDechetsTextVerres;
+    [SerializeField] private TMPro.TextMeshProUGUI scoreText;
+    [SerializeField] private TMPro.TextMeshProUGUI erreursText;
+    [SerializeField] private TMPro.TextMeshProUGUI numberOfDechetsTextPommes;
+    [SerializeField] private TMPro.TextMeshProUGUI numberOfDechetsTextEmballages;
+    [SerializeField] private TMPro.TextMeshProUGUI numberOfDechetsTextVerres;
 
     [Header("Tags des déchets")]
     [SerializeField] private string pommesTag = "Pommes";
@@ -21,8 +22,10 @@ public class ScoreManager : MonoBehaviour
     [Header("Paramètres")]
     [Tooltip("Préfixe affiché avant le score, ex: 'Score : '")]
     [SerializeField] private string scorePrefix = "Score : ";
+    [SerializeField] private string ErreursPrefix = "Erreurs : ";
 
     private int currentScore = 0;
+    private int errorCount = 0;
     private int dechetsLayer;
 
     private void Awake()
@@ -91,6 +94,7 @@ public class ScoreManager : MonoBehaviour
     public void RemovePoint()
     {
         currentScore--;
+        errorCount++;
         UpdateScoreDisplay();
     }
 
@@ -104,6 +108,11 @@ public class ScoreManager : MonoBehaviour
         if (scoreText != null)
         {
             scoreText.text = scorePrefix + currentScore;
+        }
+
+        if (erreursText != null)
+        {
+            erreursText.text = ErreursPrefix + errorCount;
         }
     }
 }
