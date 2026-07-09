@@ -1,0 +1,23 @@
+{
+    "score": 2,
+    "erreurs": 2,
+    "temps": 44,
+    "scrollbars": [
+        {
+            "value": 0.4506923258304596,
+            "text": "Ergonomie des menus"
+        },
+        {
+            "value": 0.7226385474205017,
+            "text": "Utilité des aides"
+        },
+        {
+            "value": 0.222211092710495,
+            "text": "Niveau de confort"
+        },
+        {
+            "value": 0.6269953846931458,
+            "text": "Charge cognitive"
+        }
+    ]
+}

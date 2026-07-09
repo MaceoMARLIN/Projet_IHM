@@ -3711,6 +3711,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1732997137}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &606593344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6586,7 +6598,7 @@ GameObject:
   - component: {fileID: 889382177}
   - component: {fileID: 889382176}
   m_Layer: 5
-  m_Name: Text (TMP) (3)
+  m_Name: q4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7701,7 +7713,7 @@ GameObject:
   - component: {fileID: 1018143916}
   - component: {fileID: 1018143915}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: q2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9672,7 +9684,7 @@ GameObject:
   - component: {fileID: 1288743379}
   - component: {fileID: 1288743378}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: q1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12490,6 +12502,15 @@ MonoBehaviour:
   tempsFinalText: {fileID: 1330791424}
   ResultFinalText: {fileID: 1120589621}
   gameOverMenu: {fileID: 901027317}
+  scrollbar1: {fileID: 2001778179}
+  scrollbar2: {fileID: 1605477926}
+  scrollbar3: {fileID: 405889354}
+  scrollbar4: {fileID: 1238115750}
+  scrollbarText1: {fileID: 1288743378}
+  scrollbarText2: {fileID: 1018143915}
+  scrollbarText3: {fileID: 1769077012}
+  scrollbarText4: {fileID: 889382176}
+  jsonFileName: score_results.json
 --- !u!1 &1743111996
 GameObject:
   m_ObjectHideFlags: 0
@@ -12950,7 +12971,7 @@ GameObject:
   - component: {fileID: 1769077013}
   - component: {fileID: 1769077012}
   m_Layer: 5
-  m_Name: Text (TMP) (2)
+  m_Name: q3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
